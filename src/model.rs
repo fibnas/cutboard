@@ -146,7 +146,6 @@ impl SceneMeta {
 pub struct DialogueFile {
     pub name: String,
     pub path: PathBuf,
-    pub bytes: u64,
     pub words: usize,
 }
 
@@ -202,11 +201,6 @@ impl Project {
         };
         project.reload_scenes()?;
         Ok(project)
-    }
-
-    pub fn save_meta(&self) -> Result<()> {
-        fs::write(self.root.join(PROJECT_FILE), self.meta.to_ini())?;
-        Ok(())
     }
 
     pub fn reload_scenes(&mut self) -> Result<()> {
@@ -466,14 +460,12 @@ fn load_scene(dir: PathBuf) -> Result<Option<Scene>> {
         .filter(|p| p.is_file() && p.extension().and_then(|e| e.to_str()) == Some("txt"))
         .filter_map(|path| {
             let name = path.file_name()?.to_str()?.to_string();
-            let bytes = fs::metadata(&path).ok()?.len();
             let words = fs::read_to_string(&path)
                 .map(|s| word_count(&s))
                 .unwrap_or(0);
             Some(DialogueFile {
                 name,
                 path,
-                bytes,
                 words,
             })
         })
