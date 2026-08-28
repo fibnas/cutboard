@@ -4,6 +4,9 @@ version = "0.1.0"
 edition = "2021"
 description = "TUI paper-edit board for mini-documentaries: project → scenes → dialogue text files"
 license = "MIT"
+repository = "https://github.com/fibnas/cutboard"
+homepage = "https://github.com/fibnas/cutboard"
+readme = "README.md"
 
 [dependencies]
 anyhow = "=1.0.86"
