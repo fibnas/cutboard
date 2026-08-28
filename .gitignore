@@ -1,0 +1,10 @@
+/target/
+**/*.rs.bk
+Cargo.lock.bak
+/cutboard
+/cutboard.exe
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
